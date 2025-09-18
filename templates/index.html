@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>ML API</title>
+    <style>
+        * { box-sizing: border-box; }
+        body {
+            background-image: url("/static/farm.jpg");
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            height: 100vh;
+            width: 200vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .login {
+            background-color: rgba(255, 255, 255, 0.95);
+            padding: 40px 30px;
+            border-radius: 15px;
+            width: 100%;
+            max-width: 400px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+        }
+        h1 {
+            text-align: center;
+            margin-bottom: 25px;
+            color: #333;
+            font-size: 24px;
+        }
+        input[type="text"] {
+            width: 100%;
+            padding: 12px 15px;
+            margin: 10px 0;
+            border: 1px solid #bbb;
+            border-radius: 8px;
+            transition: 0.3s;
+        }
+        input[type="text"]:focus {
+            border-color: #28a745;
+            outline: none;
+            box-shadow: 0 0 5px rgba(40, 167, 69, 0.5);
+        }
+        button {
+            width: 100%;
+            padding: 12px;
+            background-color: #28a745;
+            color: white;
+            font-size: 16px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            margin-top: 15px;
+            transition: background-color 0.3s;
+        }
+        button:hover {
+            background-color: #218838;
+        }
+        #predi {
+            text-align: center;
+            margin-top: 20px;
+            font-size: 18px;
+            color: #333;
+        }
+    </style>
+</head>
+<body>
+    <div class="login">
+        <h1>Crop Prediction Model</h1>
+        <form action="{{ url_for('predict') }}" method="post">
+            <input type="text" name="Nitrogen" placeholder="Nitrogen" required />
+            <input type="text" name="Phosphorus" placeholder="Phosphorus" required />
+            <input type="text" name="Potassium" placeholder="Potassium" required />
+            <input type="text" name="temperature" placeholder="Temperature" required />
+            <input type="text" name="humidity" placeholder="Humidity" required />
+            <input type="text" name="pH" placeholder="pH" required />
+            <input type="text" name="rainfall" placeholder="Rainfall" required />
+            <button type="submit">Predict</button>
+        </form>
+        {% if prediction_text %}
+        <h3 id="predi">{{ prediction_text }}</h3>
+        {% endif %}
+    </div>
+</body>
+</html>
